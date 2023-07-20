@@ -2,8 +2,7 @@ const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 const route = express.Router();
-const {User} = require('../model');
-const {Product} = require('../model');
+const {User, Product} = require('../model');
 const user = new User();
 const product = new Product();
 

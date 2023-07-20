@@ -1,5 +1,4 @@
 const db = require('../config');
-const jwToken = require('jsonwebtoken');
 
 const {
     hash,
