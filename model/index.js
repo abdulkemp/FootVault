@@ -19,7 +19,7 @@ class User {
         } = req.body;
         db.query(`select * FROM Users where emailAdd = '${emailAdd}';`, async (err, result) => {
             // const userLog = result
-            if (!err) console.log('err: ',err);
+            if (err) console.log('err: ',err);
             if (!result?.length || result == null) {
                 res.status(401).json({
                     err: 'You entered the wrong email address'
@@ -52,7 +52,7 @@ class User {
         const fetchAllUsersQuery = `select userID, firstName, lastName, emailAdd, password, imgPro FROM Users;`;
 
         db.query(fetchAllUsersQuery, (err, data) => {
-            if (!err) throw err, console.log(err);
+            if (err) throw err, console.log(err);
             else res.status(200).json({
                 results: data
             });
@@ -62,7 +62,7 @@ class User {
         const fetchUserQuery = `select userID, firstName, lastName, emailAdd, password, imgPro FROM Users where userID = ?;`;
 
         db.query(fetchUserQuery, [req.params.id], (err, data) => {
-            if (!err) throw err, console.log(err);
+            if (err) throw err, console.log(err);
             else res.status(200).json({
                 results: data
             });
@@ -108,7 +108,7 @@ class User {
         const updateQuery = `UPDATE Users SET ? WHERE userID = ?;`;
 
         db.query(updateQuery, [data, req.params.id], (err) => {
-            if (!err) throw err, console.log(err);
+            if (err) throw err, console.log(err);
             res.status(200).json({
                 msg: 'A row was affected.'
             });
@@ -118,7 +118,7 @@ class User {
         const deleteQuery = `DELETE FROM Users WHERE userID = ?;`;
 
         db.query(deleteQuery, [req.params.id], (err) => {
-            if (!err) throw err, console.log(err);
+            if (err) throw err, console.log(err);
             res.status(200).json({
                 msg: 'A record was removed from a database'
             });
@@ -132,7 +132,7 @@ class Product {
         const fetchAllProducts = `SELECT id, prodName, prodDesc, prodPrice, prodCate, quantity, image, shipPrice FROM Products;`;
 
         db.query(fetchAllProducts, (err, results) => {
-            if (!err) throw err, console.log(err);
+            if (err) throw err, console.log(err);
             res.status(200).json({
                 results: results
             });
@@ -142,7 +142,7 @@ class Product {
         const fetchProductQuery = `SELECT id, prodName, prodDesc, prodPrice, prodCate, quantity, image, shipPrice FROM Products WHERE id = ?;`;
 
         db.query(fetchProductQuery, [req.params.id], (err, results) => {
-            if (!err) throw err, console.log(err);
+            if (err) throw err, console.log(err);
             res.status(200).json({
                 results: results
             });
