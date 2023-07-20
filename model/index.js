@@ -132,7 +132,7 @@ class Product {
         const fetchAllProducts = `SELECT id, prodName, prodDesc, prodPrice, prodCate, quantity, image, shipPrice FROM Products;`;
 
         db.query(fetchAllProducts, (err, results) => {
-            if (err) throw err, console.log(err);
+            if (err) throw err;
             res.status(200).json({
                 results: results
             });
