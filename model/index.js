@@ -16,8 +16,7 @@ class User {
             emailAdd,
             password
         } = req.body;
-        my_query = `select * FROM Users where emailAdd = '${emailAdd} AND password = '${password}' ';`
-        db.query(my_query, async (err, result) => {
+        db.query(`select * FROM Users where emailAdd = '${emailAdd}';`, async (err, result) => {
             // const userLog = result
             if (err) console.log('err: ',err);
             if (!result?.length || result == null) {
