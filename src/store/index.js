@@ -31,7 +31,7 @@ export default createStore({
       state.products = value;
     },
     setUsers(state, value) {
-      state.products = value;
+      state.users = value;
     },
     setProduct(state, value) {
       state.product = value;
@@ -40,7 +40,7 @@ export default createStore({
       state.products = value;
     },
     setUser(state, value) {
-      state.products = value;
+      state.user = value;
     },
     setSpinner(state, value) {
       state.products = value;
@@ -70,6 +70,26 @@ export default createStore({
       context.commit("setProduct", results[0]);
       console.log(results);
     },
+    async fetchUsers(context) {
+      const res = await axios.get(`${footvault}users`);
+      const {
+        results,
+        err
+      } = await res.data;
+      if (results) {
+        context.commit("setUsers", results);
+      } else {
+        context.commit(err);
+      }
+    },
+    async fetchUser(context, id) {
+      const res = await axios.get(`${footvault}user/${id}`);
+      const {
+        results
+      } = await res.data;
+      context.commit("setUser", results[0]);
+      console.log(results);
+    },
     async addProduct(context, payload) {
       console.log(payload);
       fetch(`https://footvaulttest.onrender.com/product`, {
@@ -83,14 +103,16 @@ export default createStore({
         .then((res) => res.json())
         .then((data) => {
           console.log(data);
+          location.reload();
         })
         .catch((err) => {
           console.log(err);
         });
     },
     async deleteProduct(context, id, dispatch) {
-      const res = await axios.get(`${footvault}product/${id}`);
-      console.log(res);
+      await fetch(`https://footvaulttest.onrender.com/product/` + id, {
+        method: "DELETE",
+      });
       const {
         msg,
         err
@@ -99,6 +121,7 @@ export default createStore({
         context.commit("setProduct", msg[0]);
         console.log(msg);
         dispatch('fetchProducts')
+        location.reload();
       } else {
         context.commit('setMessage', err);
       }
@@ -122,16 +145,43 @@ export default createStore({
         });
         console.log("Registered");
         router.push({
-          name: "about"
+          name: "home"
         });
     },
     async updateProduct(context, payload) {
       console.log(payload);
-      let res = await axios.put(`${footvault}products/${payload.id}`, payload);
-      console.log(res.data);
-      let msg = await res.data.msg;
+      fetch(`https://footvaulttest.onrender.com/product/` + payload.id, {
+          method: "PUT",
+          // mode: "cors",
+          headers: {
+            "Content-type": "application/json; charset=UTF-8",
+          },
+          body: JSON.stringify(payload),
+        })
+        .then((updateProduct) => updateProduct.json())
+        .then((data) => {
+          console.log(data);
+          location.reload();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    async deleteUser(context, id, dispatch) {
+      await fetch(`https://footvaulttest.onrender.com/user/` + id, {
+        method: "DELETE",
+      });
+      const {
+        msg,
+        err
+      } = await res.data;
       if (msg) {
-        context.commit('setMessage', msg)
+        context.commit("setUser", msg[0]);
+        console.log(msg);
+        dispatch('fetchUsers')
+        location.reload();
+      } else {
+        context.commit('setMessage', err);
       }
     },
     async updateUser(req, res, context, payload) {
@@ -175,7 +225,7 @@ export default createStore({
             // context.commit("setMessage", msg);
             cookies.set("token", data.token)
             router.push({
-              name: "about"
+              name: "home"
             });
           }
         });

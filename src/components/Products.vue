@@ -1,57 +1,6 @@
 <template>
   <div class="alles" v-if="items">
     <!-- <div class="line"></div> -->
-
-    <div class="add">
-      <!-- Button trigger modal -->
-      <button
-        type="button"
-        class="btn btn-primary"
-        data-bs-toggle="modal"
-        data-bs-target="#staticBackdrop"
-      >
-        Launch static backdrop modal
-      </button>
-
-      <!-- Modal -->
-      <div
-        class="modal fade"
-        id="staticBackdrop"
-        data-bs-backdrop="static"
-        data-bs-keyboard="false"
-        tabindex="-1"
-        aria-labelledby="staticBackdropLabel"
-        aria-hidden="true"
-      >
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h1 class="modal-title fs-5" id="staticBackdropLabel">
-                Modal title
-              </h1>
-              <button
-                type="button"
-                class="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              ></button>
-            </div>
-            <div class="modal-body">...</div>
-            <div class="modal-footer">
-              <button
-                type="button"
-                class="btn btn-secondary"
-                data-bs-dismiss="modal"
-              >
-                Close
-              </button>
-              <button type="button" class="btn btn-primary">Understood</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
     <div class="prod container">
       <div class="row">
         <div class="col-md-4 mt-5" v-for="item in items" :key="item.id">
@@ -67,6 +16,8 @@
             <div class="card-body">
               <h5 class="card-title">{{ item.prodName }}</h5>
               <button class="bt">Add to cart</button>
+              
+             
               <!-- <router-link class="bt1" :to="{name: 'single', params: {id: item.id}}" >
                  Show More...
                 </router-link> -->
@@ -109,11 +60,24 @@ export default {
       this.items = res.data.results;
       console.log(res);
     },
+    
   },
 };
 </script>
 
 <style>
+.add-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.edit-product {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 .card {
   width: 20rem;
   /* height: 10rem; */
