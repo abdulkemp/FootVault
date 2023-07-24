@@ -81,6 +81,15 @@ export default {
 .card {
   width: 20rem;
   /* height: 10rem; */
+  background-color: #1c1c1c;
+}
+
+.card:hover{
+  transition: 0.5s;
+  transition-duration: 0.5s;
+  box-shadow: 0 20px 30px rgba(0, 0, 0, 0.7);
+  transform: scale(1.1);
+  overflow: hidden;
 }
 
 .card-title {
