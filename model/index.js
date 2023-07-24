@@ -48,7 +48,7 @@ class User {
         })
     }
     fetchUsers(req, res) {
-        const fetchAllUsersQuery = `select userID, firstName, lastName, emailAdd, password, imgPro FROM Users;`;
+        const fetchAllUsersQuery = `select userID, firstName, lastName, emailAdd, password, imgPro, role FROM Users;`;
 
         db.query(fetchAllUsersQuery, (err, data) => {
             if (err) throw err;
@@ -58,7 +58,7 @@ class User {
         });
     };
     fetchUser(req, res) {
-        const fetchUserQuery = `select userID, firstName, lastName, emailAdd, password, imgPro FROM Users where userID = ?;`;
+        const fetchUserQuery = `select userID, firstName, lastName, emailAdd, password, imgPro, role FROM Users where userID = ?;`;
 
         db.query(fetchUserQuery, [req.params.id], (err, data) => {
             if (err) throw err;
