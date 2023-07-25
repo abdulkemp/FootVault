@@ -1,109 +1,114 @@
 <template>
-  <div v-if="users" class="admin-page">
-    <NavBar />
-    <div class="admin">
-      <h1>Users</h1>
-      <div class="admin-user">
-        <table class="table">
-          <thead>
-            <tr>
-              <th scope="col"><div class="header">#</div></th>
-              <th scope="col"><div class="header">Firstname</div></th>
-              <th scope="col"><div class="header">Lastname</div></th>
-              <th scope="col"><div class="header">Email Address</div></th>
-              <th scope="col"><div class="header">Password</div></th>
-              <th scope="col"><div class="header">Profile Image</div></th>
-              <th scope="col"><div class="header">User Role</div></th>
-              <th scope="col"><div class="header">Edit / Delete</div></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="item in users" :key="item.userID">
-              <td>
-                <div class="row-col id">{{ item.userID }}</div>
-              </td>
-              <td>
-                <div class="row-col">{{ item.firstName }}</div>
-              </td>
-              <td>
-                <div class="row-col">{{ item.lastName }}</div>
-              </td>
-              <td>
-                <div class="row-col">{{ item.emailAdd }}</div>
-              </td>
-              <td><div class="row-col pass"><p> {{ item.password }} </p></div></td>
-              <td>
-                <div class="img-col">
-                  <div class="td-img"><img :src="item.imgPro" alt="" /></div>
-                </div>
-              </td>
-              <td>
-                <div class="row-col">{{ item.role }}</div>
-              </td>
-              <td>
-                <div class="edit-delete">
-                  <button
-                    type="button"
-                    class="btn btn-primary edit"
-                    data-bs-toggle="modal"
-                    :data-bs-target="`#exampleModal${item.userID}`"
-                  >
-                    Edit
-                  </button>
-                  <!-- Modal -->
-                  <div
-                    class="modal fade"
-                    :id="`exampleModal${item.userID}`"
-                    :key="item.userID"
-                    data-bs-backdrop="static"
-                    data-bs-keyboard="false"
-                    tabindex="-1"
-                    aria-labelledby="exampleModalLabel"
-                    aria-hidden="true"
-                  >
-                    <div class="modal-dialog">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h1 class="modal-title fs-5" id="exampleModalLabel">
-                            Edit User
-                          </h1>
-                          <button
-                            type="button"
-                            class="btn-close"
-                            data-bs-dismiss="modal"
-                            aria-label="Close"
-                          ></button>
-                        </div>
-                        <div class="modal-body edit-body">
-                          <div class="add-body" @submit.prevent="updateUser">
-                            <label for="">User First-name</label>
-                            <div class="align">
-                              <input
-                                type="text"
-                                v-model="item.firstName"
-                                required
-                                placeholder="Firstname"
-                              />
-                            </div>
-                            <label for="">User Last-name</label>
-                            <div class="align">
-                              <input
-                                type="text"
-                                v-model="item.lastName"
-                                required
-                                placeholder="Lastname"
-                              />
-                            </div>
-                            <label for="">Email Address</label>
-                            <div class="align">
-                              <input
-                                type="text"
-                                v-model="item.emailAdd"
-                                required
-                                placeholder="@gmail/hotmail.com"
-                              />
-                            </div>
-                            <!-- <label for=""></label>
+  <div v-if="item.role === 'Admin'" class="admin-page">
+    <div v-if="users">
+      <NavBar />
+      <div class="admin">
+        <h1>Users</h1>
+        <div class="admin-user">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col"><div class="header">#</div></th>
+                <th scope="col"><div class="header">Firstname</div></th>
+                <th scope="col"><div class="header">Lastname</div></th>
+                <th scope="col"><div class="header">Email Address</div></th>
+                <th scope="col"><div class="header">Password</div></th>
+                <th scope="col"><div class="header">Profile Image</div></th>
+                <th scope="col"><div class="header">User Role</div></th>
+                <th scope="col"><div class="header">Edit / Delete</div></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="item in users" :key="item.userID">
+                <td>
+                  <div class="row-col id">{{ item.userID }}</div>
+                </td>
+                <td>
+                  <div class="row-col">{{ item.firstName }}</div>
+                </td>
+                <td>
+                  <div class="row-col">{{ item.lastName }}</div>
+                </td>
+                <td>
+                  <div class="row-col">{{ item.emailAdd }}</div>
+                </td>
+                <td>
+                  <div class="row-col pass">
+                    <p>{{ item.password }}</p>
+                  </div>
+                </td>
+                <td>
+                  <div class="img-col">
+                    <div class="td-img"><img :src="item.imgPro" alt="" /></div>
+                  </div>
+                </td>
+                <td>
+                  <div class="row-col">{{ item.role }}</div>
+                </td>
+                <td>
+                  <div class="edit-delete">
+                    <button
+                      type="button"
+                      class="btn btn-primary edit"
+                      data-bs-toggle="modal"
+                      :data-bs-target="`#exampleModal${item.userID}`"
+                    >
+                      Edit
+                    </button>
+                    <!-- Modal -->
+                    <div
+                      class="modal fade"
+                      :id="`exampleModal${item.userID}`"
+                      :key="item.userID"
+                      data-bs-backdrop="static"
+                      data-bs-keyboard="false"
+                      tabindex="-1"
+                      aria-labelledby="exampleModalLabel"
+                      aria-hidden="true"
+                    >
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">
+                              Edit User
+                            </h1>
+                            <button
+                              type="button"
+                              class="btn-close"
+                              data-bs-dismiss="modal"
+                              aria-label="Close"
+                            ></button>
+                          </div>
+                          <div class="modal-body edit-body">
+                            <div class="add-body" @submit.prevent="updateUser">
+                              <label for="">User First-name</label>
+                              <div class="align">
+                                <input
+                                  type="text"
+                                  v-model="item.firstName"
+                                  required
+                                  placeholder="Firstname"
+                                />
+                              </div>
+                              <label for="">User Last-name</label>
+                              <div class="align">
+                                <input
+                                  type="text"
+                                  v-model="item.lastName"
+                                  required
+                                  placeholder="Lastname"
+                                />
+                              </div>
+                              <label for="">Email Address</label>
+                              <div class="align">
+                                <input
+                                  type="text"
+                                  v-model="item.emailAdd"
+                                  required
+                                  placeholder="@gmail/hotmail.com"
+                                />
+                              </div>
+                              <!-- <label for=""></label>
                               <div class="align">
                               <input
                               type="number"
@@ -111,233 +116,235 @@
                               required
                               placeholder="0"
                             /> </div> -->
-                            <label for="">User Role</label>
-                            <div class="align">
+                              <label for="">User Role</label>
+                              <div class="align">
+                                <input
+                                  type="text"
+                                  v-model="item.role"
+                                  required
+                                  placeholder="Admin/User"
+                                />
+                              </div>
+                            </div>
+                          </div>
+                          <div class="modal-footer">
+                            <button
+                              type="button"
+                              class="btn btn-secondary"
+                              data-bs-dismiss="modal"
+                            >
+                              Close
+                            </button>
+                            <button
+                              class="btn btn-success size"
+                              type="submit"
+                              @click="this.$store.dispatch('updateUser', item)"
+                            >
+                              Edit User
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <button
+                      type="button"
+                      class="btn btn-danger delete"
+                      data-bs-toggle="modal"
+                      :data-bs-target="`#userModal${item.userID}`"
+                    >
+                      Delete
+                    </button>
+                    <div
+                      class="modal fade"
+                      :id="`userModal${item.userID}`"
+                      tabindex="-1"
+                      aria-labelledby="userModalLabel"
+                      aria-hidden="true"
+                      :key="item.userID"
+                    >
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="userModalLabel">
+                              Delete User
+                            </h1>
+                            <button
+                              type="button"
+                              class="btn-close"
+                              data-bs-dismiss="modal"
+                              aria-label="Close"
+                            ></button>
+                          </div>
+                          <div class="modal-body" @submit="deleteUser()">
+                            <h1>
+                              Are you sure that you want to delete
+                              {{ item.firstName }} ?
+                            </h1>
+                          </div>
+                          <div class="modal-footer">
+                            <button
+                              type="button"
+                              class="btn btn-secondary"
+                              data-bs-dismiss="modal"
+                            >
+                              Close
+                            </button>
+                            <button
+                              type="button"
+                              class="btn btn-primary size"
+                              @click="deleteUser(item.userID)"
+                            >
+                              Delete User
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="lined">
+        <div class="inline"></div>
+      </div>
+      <div class="products">
+        <h1>Products</h1>
+        <div class="product-table">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col"><div class="header">#</div></th>
+                <th scope="col"><div class="header">Product Name</div></th>
+                <th scope="col"><div class="header">Category</div></th>
+                <th scope="col"><div class="header">Price</div></th>
+                <th scope="col"><div class="header">Quantity</div></th>
+                <th scope="col"><div class="header">Product Image</div></th>
+                <th scope="col"><div class="header">Ship Price</div></th>
+                <th scope="col"><div class="header">Edit / Delete</div></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="prod in products" :key="prod.id">
+                <td>
+                  <div class="row-col id">{{ prod.id }}</div>
+                </td>
+                <td>
+                  <div class="row-col">{{ prod.prodName }}</div>
+                </td>
+                <td>
+                  <div class="row-col">{{ prod.prodCate }}</div>
+                </td>
+                <td>
+                  <div class="row-col">R {{ prod.prodPrice }}</div>
+                </td>
+                <td>
+                  <div class="row-col">{{ prod.quantity }}</div>
+                </td>
+                <td>
+                  <div class="img-col">
+                    <div class="td-img"><img :src="prod.image" alt="" /></div>
+                  </div>
+                </td>
+                <td>
+                  <div class="row-col">R {{ prod.shipPrice }}</div>
+                </td>
+                <td>
+                  <div class="edit-delete">
+                    <button
+                      type="button"
+                      class="btn btn-primary edit"
+                      data-bs-toggle="modal"
+                      :data-bs-target="`#editModal${prod.id}`"
+                    >
+                      Edit
+                    </button>
+                    <div
+                      class="modal fade"
+                      :id="`editModal${prod.id}`"
+                      :key="prod.id"
+                      data-bs-backdrop="static"
+                      data-bs-keyboard="false"
+                      tabindex="-1"
+                      aria-labelledby="editModalLabel"
+                      aria-hidden="true"
+                    >
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="editModalLabel">
+                              Modal title
+                            </h1>
+                            <button
+                              type="button"
+                              class="btn-close"
+                              data-bs-dismiss="modal"
+                              aria-label="Close"
+                            ></button>
+                          </div>
+                          <div class="modal-body">
+                            <div class="heading">
+                              <h1>Edit Product</h1>
+                            </div>
+                            <div
+                              class="add-body"
+                              @submit.prevent="updateProduct"
+                            >
+                              <label for="">Product Name</label>
                               <input
                                 type="text"
-                                v-model="item.role"
+                                v-model="prod.prodName"
                                 required
-                                placeholder="Admin/User"
+                                placeholder="Product Name"
+                              />
+                              <label for="">Price</label>
+                              <input
+                                type="text"
+                                v-model="prod.prodPrice"
+                                required
+                                placeholder="R"
+                              />
+                              <label for="">Category</label>
+                              <input
+                                type="text"
+                                v-model="prod.prodCate"
+                                required
+                                placeholder="Name"
+                              />
+                              <label for="">Quantity</label>
+                              <input
+                                type="number"
+                                v-model="prod.quantity"
+                                required
+                                placeholder="0"
+                              />
+                              <label for="">Image</label>
+                              <input
+                                type="text"
+                                v-model="prod.image"
+                                required
+                                placeholder="http://"
+                              />
+                              <label for="">Description</label>
+                              <textarea
+                                type="text"
+                                v-model="prod.prodDesc"
+                                required
+                                placeholder="Product Description"
                               />
                             </div>
                           </div>
-                        </div>
-                        <div class="modal-footer">
-                          <button
-                            type="button"
-                            class="btn btn-secondary"
-                            data-bs-dismiss="modal"
-                          >
-                            Close
-                          </button>
-                          <button
-                            class="btn btn-success size"
-                            type="submit"
-                            @click="this.$store.dispatch('updateUser', item)"
-                          >
-                            Edit User
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <button
-                    type="button"
-                    class="btn btn-danger delete"
-                    data-bs-toggle="modal"
-                    :data-bs-target="`#userModal${item.userID}`"
-                  >
-                    Delete
-                  </button>
-                  <div
-                    class="modal fade"
-                    :id="`userModal${item.userID}`"
-                    tabindex="-1"
-                    aria-labelledby="userModalLabel"
-                    aria-hidden="true"
-                    :key="item.userID"
-                  >
-                    <div class="modal-dialog">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h1 class="modal-title fs-5" id="userModalLabel">
-                            Delete User
-                          </h1>
-                          <button
-                            type="button"
-                            class="btn-close"
-                            data-bs-dismiss="modal"
-                            aria-label="Close"
-                          ></button>
-                        </div>
-                        <div class="modal-body" @submit="deleteUser()">
-                          <h1>
-                            Are you sure that you want to delete
-                            {{ item.firstName }} ?
-                          </h1>
-                        </div>
-                        <div class="modal-footer">
-                          <button
-                            type="button"
-                            class="btn btn-secondary"
-                            data-bs-dismiss="modal"
-                          >
-                            Close
-                          </button>
-                          <button
-                            type="button"
-                            class="btn btn-primary size"
-                            @click="deleteUser(item.userID)"
-                          >
-                            Delete User
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-    <div class="line">
-      <div class="inline"></div>
-    </div>
-    <div class="products">
-      <h1>Products</h1>
-      <div class="product-table">
-        <table class="table">
-          <thead>
-            <tr>
-              <th scope="col"><div class="header">#</div></th>
-              <th scope="col"><div class="header">Product Name</div></th>
-              <th scope="col"><div class="header">Category</div></th>
-              <th scope="col"><div class="header">Price</div></th>
-              <th scope="col"><div class="header">Quantity</div></th>
-              <th scope="col"><div class="header">Product Image</div></th>
-              <th scope="col"><div class="header">Ship Price</div></th>
-              <th scope="col"><div class="header">Edit / Delete</div></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="prod in products" :key="prod.id">
-              <td>
-                <div class="row-col id">{{ prod.id }}</div>
-              </td>
-              <td>
-                <div class="row-col">{{ prod.prodName }}</div>
-              </td>
-              <td>
-                <div class="row-col">{{ prod.prodCate }}</div>
-              </td>
-              <td>
-                <div class="row-col">R {{ prod.prodPrice }}</div>
-              </td>
-              <td>
-                <div class="row-col">{{ prod.quantity }}</div>
-              </td>
-              <td>
-                <div class="img-col">
-                  <div class="td-img"><img :src="prod.image" alt="" /></div>
-                </div>
-              </td>
-              <td>
-                <div class="row-col">R {{ prod.shipPrice }}</div>
-              </td>
-              <td>
-                <div class="edit-delete">
-                  <button
-                    type="button"
-                    class="btn btn-primary edit"
-                    data-bs-toggle="modal"
-                    :data-bs-target="`#editModal${prod.id}`"
-                  >
-                    Edit
-                  </button>
-                  <div
-                    class="modal fade"
-                    :id="`editModal${prod.id}`"
-                    :key="prod.id"
-                    data-bs-backdrop="static"
-                    data-bs-keyboard="false"
-                    tabindex="-1"
-                    aria-labelledby="editModalLabel"
-                    aria-hidden="true"
-                  >
-                    <div class="modal-dialog">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h1 class="modal-title fs-5" id="editModalLabel">
-                            Modal title
-                          </h1>
-                          <button
-                            type="button"
-                            class="btn-close"
-                            data-bs-dismiss="modal"
-                            aria-label="Close"
-                          ></button>
-                        </div>
-                        <div class="modal-body">
-                          <div class="heading">
-                            <h1>Edit Product</h1>
-                          </div>
-                          <div class="add-body" @submit.prevent="updateProduct">
-                            <label for="">Product Name</label>
-                            <input
-                              type="text"
-                              v-model="prod.prodName"
-                              required
-                              placeholder="Product Name"
-                            />
-                            <label for="">Price</label>
-                            <input
-                              type="text"
-                              v-model="prod.prodPrice"
-                              required
-                              placeholder="R"
-                            />
-                            <label for="">Category</label>
-                            <input
-                              type="text"
-                              v-model="prod.prodCate"
-                              required
-                              placeholder="Name"
-                            />
-                            <label for="">Quantity</label>
-                            <input
-                              type="number"
-                              v-model="prod.quantity"
-                              required
-                              placeholder="0"
-                            />
-                            <label for="">Image</label>
-                            <input
-                              type="text"
-                              v-model="prod.image"
-                              required
-                              placeholder="http://"
-                            />
-                            <label for="">Description</label>
-                            <textarea
-                              type="text"
-                              v-model="prod.prodDesc"
-                              required
-                              placeholder="Product Description"
-                            />
-                            
-                          </div>
-                        </div>
-                        <div class="modal-footer">
-                          <button
-                            type="button"
-                            class="btn btn-secondary"
-                            data-bs-dismiss="modal"
-                          >
-                            Close
-                          </button>
-                          <button
+                          <div class="modal-footer">
+                            <button
+                              type="button"
+                              class="btn btn-secondary"
+                              data-bs-dismiss="modal"
+                            >
+                              Close
+                            </button>
+                            <button
                               class="btn btn-success size"
                               type="submit"
                               @click="
@@ -346,80 +353,86 @@
                             >
                               Edit Product
                             </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <button
+                      type="button"
+                      class="btn btn-danger delete"
+                      data-bs-toggle="modal"
+                      :data-bs-target="`#deleteModal${prod.id}`"
+                    >
+                      Delete
+                    </button>
+                    <div
+                      class="modal fade"
+                      :id="`deleteModal${prod.id}`"
+                      tabindex="-1"
+                      aria-labelledby="deleteModalLabel"
+                      aria-hidden="true"
+                      :key="prod.id"
+                    >
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="deleteModalLabel">
+                              Delete Product
+                            </h1>
+                            <button
+                              type="button"
+                              class="btn-close"
+                              data-bs-dismiss="modal"
+                              aria-label="Close"
+                            ></button>
+                          </div>
+                          <div class="modal-body" @submit="deleteProduct()">
+                            <h1>
+                              Are you sure that you want to delete
+                              {{ prod.prodName }} ?
+                            </h1>
+                          </div>
+                          <div class="modal-footer">
+                            <button
+                              type="button"
+                              class="btn btn-secondary"
+                              data-bs-dismiss="modal"
+                            >
+                              Close
+                            </button>
+                            <button
+                              type="button"
+                              class="btn btn-danger size"
+                              @click="deleteProduct(prod.id)"
+                            >
+                              Delete Product
+                            </button>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <button
-                    type="button"
-                    class="btn btn-danger delete"
-                    data-bs-toggle="modal"
-                    :data-bs-target="`#deleteModal${prod.id}`"
-                  >
-                    Delete
-                  </button>
-                  <div
-                    class="modal fade"
-                    :id="`deleteModal${prod.id}`"
-                    tabindex="-1"
-                    aria-labelledby="deleteModalLabel"
-                    aria-hidden="true"
-                    :key="prod.id"
-                  >
-                    <div class="modal-dialog">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h1 class="modal-title fs-5" id="deleteModalLabel">
-                            Delete Product
-                          </h1>
-                          <button
-                            type="button"
-                            class="btn-close"
-                            data-bs-dismiss="modal"
-                            aria-label="Close"
-                          ></button>
-                        </div>
-                        <div class="modal-body" @submit="deleteProduct()">
-                          <h1>
-                            Are you sure that you want to delete
-                            {{ prod.prodName }} ?
-                          </h1>
-                        </div>
-                        <div class="modal-footer">
-                          <button
-                            type="button"
-                            class="btn btn-secondary"
-                            data-bs-dismiss="modal"
-                          >
-                            Close
-                          </button>
-                          <button
-                            type="button"
-                            class="btn btn-danger size"
-                            @click="deleteProduct(prod.id)"
-                          >
-                            Delete Product
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
+  </div>
+  <div v-else>
+    <SpinnerAdmin />
   </div>
 </template>
 
 <script>
 import axios from "axios";
 import NavBar from "@/components/NavBar.vue";
+import SpinnerAdmin from "@/components/SpinnerAdmin.vue";
 export default {
   components: {
     NavBar,
+    SpinnerAdmin,
   },
   data() {
     return {
@@ -463,14 +476,13 @@ export default {
   background-color: grey;
 } */
 
-td .pass p{
+td .pass p {
   /* width: 7rem !important;  */
   word-break: break-all;
   font-size: 11px;
 }
 
-.line {
-  width: 100%;
+.lined {
   display: flex;
   justify-content: center;
   margin-top: 3rem;
@@ -542,7 +554,7 @@ th {
   align-items: center;
 }
 
-.td-img img:hover{
+.td-img img:hover {
   transition: 0.5s;
   box-shadow: 0 20px 30px rgba(0, 0, 0, 0.7);
   transform: scale(2.5);
@@ -661,15 +673,15 @@ td .row-col {
   align-items: center;
 }
 
-.size{
+.size {
   width: 9rem !important;
 }
-.size:hover{
+.size:hover {
   transition-delay: 2s;
   border-bottom: 2px solid #fde4c3;
 }
 
-.admin-page{
+.admin-page {
   text-align: center;
 }
 </style>

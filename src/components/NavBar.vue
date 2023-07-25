@@ -2,7 +2,7 @@
   <div>
     <nav class="navbar">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#">Offcanvas navbar</a>
+        <a class="navbar-brand" href="#"><div class="img-logo"><img src="https://i.postimg.cc/3rnwxrZ6/My-project-9.png" alt=""></div></a>
         <button
           class="navbar-toggler"
           type="button"
@@ -47,6 +47,16 @@
                   <router-link to="/admin">Admin</router-link>
                 </a>
               </li>
+              <li class="nav-item" data-bs-dismiss="offcanvas">
+                <a class="nav-link" href="">
+                  <router-link to="/spinner">Spinner</router-link>
+                </a>
+              </li>
+              <li class="nav-item" data-bs-dismiss="offcanvas">
+                <a class="nav-link" href="">
+                  <router-link to="/cart">Cart</router-link>
+                </a>
+              </li>
             </ul>
             <form class="d-flex mt-3" role="search">
               <input
@@ -73,5 +83,16 @@ export default {};
 <style scoped>
 ul li a{
   color: #fde4c3;
+}
+
+.img-logo{
+  width: 7rem;
+  height: 100%;
+}
+
+.img-logo img{
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
 }
 </style>

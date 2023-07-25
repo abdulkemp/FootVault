@@ -30,8 +30,8 @@ export default createStore({
     setProducts(state, value) {
       state.products = value;
     },
-    setUsers(state, value) {
-      state.users = value;
+    setUsers(state, users) {
+      state.users = users;
     },
     setProduct(state, value) {
       state.product = value;
@@ -39,8 +39,8 @@ export default createStore({
     setMessage(state, value) {
       state.products = value;
     },
-    setUser(state, value) {
-      state.user = value;
+    setUser(state, user) {
+      state.user = user;
     },
     setSpinner(state, value) {
       state.products = value;
@@ -225,21 +225,20 @@ export default createStore({
             // context.commit("setMessage", msg);
             cookies.set("token", data.token)
             router.push({
-              name: "home"
+              name: "admin"
             });
           }
         });
-      // const { jwToken, result, msg, err } = await res.data;
-      // if (result) {
-      //   context.commit('setUser', result);
-      //   context.commit('setMessage', msg);
-      //   console.log("logged in");
-      //   // context.commit('setSpinner', false);
-      //   cookies.set("LegitUser", jwToken);
-      //   // router.push("/");
-      // } else {
-      //   context.commit("setMessage", err);
-      // }
+    },
+    checkAdmin(context) {
+      // fetch("https://supremium2.onrender.com/user/" + user.userID);
+      if (context.state.user != null) {
+        if (context.state.user.role = "Admin") {
+          context.state.admin = true;
+        } else {
+          context.state.admin = false;
+        }
+      }
     },
   },
 

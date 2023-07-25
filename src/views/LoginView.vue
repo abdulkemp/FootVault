@@ -11,7 +11,7 @@
         </div>
         <div class="form">
           <div class="log">
-            <form action="" @submit="login" class="loginform">
+            <form action="" @submit.prevent="login" class="loginform" method="POST">
               <img
                 src="https://i.postimg.cc/26C74zH7/lagom-high-resolution-logo-black-on-transparent-background.png"
                 alt=""
@@ -20,6 +20,7 @@
               <input
                 class="input"
                 type="email"
+                name="emailAdd"
                 v-model="emailAdd"
                 placeholder="Email"
                 required
@@ -29,6 +30,7 @@
                 type="password"
                 v-model="password"
                 placeholder="password"
+                name="password"
                 required
               />
               <button type="submit" class="btn btn-primary">Login</button>
@@ -112,6 +114,13 @@ export default {
     };
   },
   methods: {
+    async login() {
+      const payload = {
+        emailAdd: this.emailAdd,
+        password: this.password,
+      };
+      await this.$store.dispatch("login", payload)
+    },
     register(e) {
       e.preventDefault();
       const payload = {
@@ -122,13 +131,7 @@ export default {
       };
       this.$store.dispatch("register", payload);
     },
-    async login() {
-       const payload = {
-            emailAdd: this.emailAdd,
-            password: this.password
-        };
-        await this.$store.dispatch("login", payload)
-       },
+    
     // login(e) {
     //   e.preventDefault();
     //   const payload = {

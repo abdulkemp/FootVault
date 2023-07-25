@@ -1,14 +1,14 @@
 <template>
   <div>
-    <SpinnerHome />
+      <SpinnerAdmin />
   </div>
 </template>
 
 <script>
-import SpinnerHome from "../components/SpinnerHome.vue";
+import SpinnerAdmin from "@/components/SpinnerAdmin.vue";
 export default {
   components: {
-    SpinnerHome,
+    SpinnerAdmin,
   },
 };
 </script>

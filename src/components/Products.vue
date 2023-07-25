@@ -30,18 +30,20 @@
   </div>
 
   <div v-else>
-    <Spinner />
+    <SpinnerHome />
   </div>
 </template>
 
 <script>
 import axios from "axios";
 import Footer from "../components/Footer.vue";
+import SpinnerHome from "./SpinnerHome.vue";
 // import SingleProduct from "../components/SingleProduct.vue";
 export default {
   name: "products",
   components: {
     Footer,
+    SpinnerHome
     // SingleProduct,
   },
   data() {
