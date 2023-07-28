@@ -192,7 +192,76 @@ class Product {
     };
 };
 
+class Cart {
+    fetchCarts(req, res) {
+        const fetchAllCart = `SELECT * FROM Carts;`;
+
+        db.query(fetchAllCart, (err, results) => {
+            if (err) throw err;
+            res.status(200).json({
+                results: results
+            });
+        });
+    };
+    fetchCart(req, res) {
+        const fetchCartQuery = `SELECT * FROM Carts WHERE idCart = ?;`;
+
+        db.query(fetchCartQuery, [req.params.id], (err, results) => {
+            if (err) throw err;
+            res.status(200).json({
+                results: results
+            });
+        });
+    };
+    addCart(req, res) {
+        const addCartQuery = `INSERT INTO Carts SET ?;`;
+
+        db.query(addCartQuery, [req.body], (err) => {
+            if (err) {
+                res.status(400).json({
+                    err: 'Unable to insert a new record.'
+                }), console.log(err);;
+            } else {
+                res.status(200).json({
+                    msg: 'Cart saved'
+                });
+            };
+        });
+    };
+    updateCart(req, res) {
+        const updateQuery = `UPDATE Carts SET ? WHERE idCart = ?;`;
+
+        db.query(updateQuery, [req.body, req.params.id], (err) => {
+            if (err) {
+                console.log(err);
+                res.status(400).json({
+                    err: 'Unable to update a record.'
+                });
+            } else {
+                res.status(200).json({
+                    msg: 'Cart updated'
+                });
+            };
+        });
+    }
+    deleteCart(req, res) {
+        const deleteQuery = `DELETE FROM Carts WHERE idCart = ?;`;
+
+        db.query(deleteQuery, [req.params.id], (err) => {
+            if (err) res.status(400).json({
+                err: 'The record was not found.'
+            });
+            res.status(200).json({
+                msg: 'A product was deleted'
+            });
+        });
+    };
+};
+
+
+
 module.exports = {
     User,
-    Product
+    Product,
+    Cart
 };

@@ -58,4 +58,26 @@ route.delete('/product/:id', (req, res) => {
     product.deleteProduct(req, res);
 });
 
+// CART ROUTES
+
+route.get('/carts', (req, res) => {
+    cart.fetchCart(req, res);
+});
+
+route.get('/cart/:id', (req, res) => {
+    cart.fetchCart(req, res);
+});
+
+route.post('/cart', bodyParser.json(), (req, res) => {
+    cart.addCart(req, res);
+});
+
+route.put('/cart/:id', bodyParser.json(), (req, res) => {
+    cart.updateCart(req, res);
+});
+
+route.delete('/cart/:id', (req, res) => {
+    cart.deleteCart(req, res);
+});
+
 module.exports = route;
