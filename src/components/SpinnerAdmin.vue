@@ -101,13 +101,13 @@ export default {};
   justify-content: end;
   align-items: center;
   padding-right: 0.7rem;
-  background: linear-gradient(100deg, #1c1c1c, #3f3820, #1c1c1c, #3f3820);
+  background: linear-gradient(100deg, #1c1c1c, white, #1c1c1c, white);
   background-size: 400% 400% !important;
   animation: lining 2s ease infinite;
 }
 
 .back {
-  background: linear-gradient(100deg, #1c1c1c, #302a18, #1c1c1c, #302a18);
+  background: linear-gradient(100deg, #1c1c1c, white, #1c1c1c, white);
   background-size: 400% 400% !important;
   animation: lining 2s ease infinite;
   height: 100vh;
@@ -117,7 +117,7 @@ export default {};
   width: 3.4rem;
   height: 2.6rem;
   border-radius: 5px 5px 5px 5px;
-  background: linear-gradient(100deg, #1c1c1c, #403820, #1c1c1c, #403820);
+  background: linear-gradient(100deg, #1c1c1c, white, #1c1c1c, white);
   background-size: 400% 400% !important;
   animation: lining 2s ease infinite;
 }
@@ -148,14 +148,14 @@ table {
 th {
   height: 3rem;
   border: 1px solid black;
-  background: linear-gradient(100deg, #1c1c1c, #3f3820, #1c1c1c, #3f3820);
+  background: linear-gradient(100deg, #1c1c1c, white, #1c1c1c, white);
   background-size: 400% 400% !important;
   animation: lining 2s ease infinite;
 }
 td {
   height: 3.9rem;
   border: 1px solid black;
-  background: linear-gradient(100deg, #1c1c1c, #3f3820, #1c1c1c, #3f3820);
+  background: linear-gradient(100deg, #1c1c1c, white, #1c1c1c, white);
   background-size: 400% 400% !important;
   animation: lining 2s ease infinite;
 }

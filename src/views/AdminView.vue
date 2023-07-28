@@ -1,6 +1,7 @@
 <template>
-  <div v-if="item.role === 'Admin'" class="admin-page">
-    <div v-if="users">
+  <div v-if="users" class="admin-page">
+    <!-- <div v-if="item.role === 'Admin'" ></div> -->
+    <div>
       <NavBar />
       <div class="admin">
         <h1>Users</h1>
@@ -130,15 +131,17 @@
                           <div class="modal-footer">
                             <button
                               type="button"
-                              class="btn btn-secondary"
+                              class="btn btn-secondary color"
                               data-bs-dismiss="modal"
+                              style="color: white"
                             >
                               Close
                             </button>
                             <button
-                              class="btn btn-success size"
+                              class="btn btn-success size color"
                               type="submit"
                               @click="this.$store.dispatch('updateUser', item)"
+                              style="color: white"
                             >
                               Edit User
                             </button>
@@ -184,15 +187,17 @@
                           <div class="modal-footer">
                             <button
                               type="button"
-                              class="btn btn-secondary"
+                              class="btn btn-secondary color"
                               data-bs-dismiss="modal"
+                              style="color: white"
                             >
                               Close
                             </button>
                             <button
                               type="button"
-                              class="btn btn-primary size"
+                              class="btn btn-primary size color"
                               @click="deleteUser(item.userID)"
+                              style="color: white"
                             >
                               Delete User
                             </button>
@@ -222,7 +227,6 @@
                 <th scope="col"><div class="header">Price</div></th>
                 <th scope="col"><div class="header">Quantity</div></th>
                 <th scope="col"><div class="header">Product Image</div></th>
-                <th scope="col"><div class="header">Ship Price</div></th>
                 <th scope="col"><div class="header">Edit / Delete</div></th>
               </tr>
             </thead>
@@ -247,9 +251,6 @@
                   <div class="img-col">
                     <div class="td-img"><img :src="prod.image" alt="" /></div>
                   </div>
-                </td>
-                <td>
-                  <div class="row-col">R {{ prod.shipPrice }}</div>
                 </td>
                 <td>
                   <div class="edit-delete">
@@ -339,17 +340,19 @@
                           <div class="modal-footer">
                             <button
                               type="button"
-                              class="btn btn-secondary"
+                              class="btn btn-secondary color"
                               data-bs-dismiss="modal"
+                              style="color: white"
                             >
                               Close
                             </button>
                             <button
-                              class="btn btn-success size"
+                              class="btn btn-success size color"
                               type="submit"
                               @click="
                                 this.$store.dispatch('updateProduct', prod)
                               "
+                              style="color: white"
                             >
                               Edit Product
                             </button>
@@ -395,15 +398,17 @@
                           <div class="modal-footer">
                             <button
                               type="button"
-                              class="btn btn-secondary"
+                              class="btn btn-secondary color"
                               data-bs-dismiss="modal"
+                              style="color: white"
                             >
                               Close
                             </button>
                             <button
                               type="button"
-                              class="btn btn-danger size"
+                              class="btn btn-danger size color"
                               @click="deleteProduct(prod.id)"
+                              style="color: white"
                             >
                               Delete Product
                             </button>
@@ -489,7 +494,7 @@ td .pass p {
   margin-bottom: 3rem;
 }
 .inline {
-  border: 3px solid #fde4c3;
+  border: 3px solid black;
   width: 90%;
 }
 .admin {
@@ -537,13 +542,13 @@ td {
   width: 8rem;
   background-color: transparent;
   border: none;
-  color: #fde4c3;
+  color: black;
 }
 
 th {
   background-color: transparent;
   border: none;
-  color: #fde4c3;
+  color: black;
 }
 
 .td-img {
@@ -597,7 +602,7 @@ td .img-col {
   width: 5rem;
   margin: 3px;
   text-align: center;
-  color: #fde4c3;
+  color: black;
   background-color: transparent;
   border: none;
 }
@@ -630,7 +635,8 @@ td .row-col {
 }
 
 .modal-content {
-  background-color: #302a18;
+  background-color: black;
+  color: white;
 }
 
 .add-body {
@@ -675,13 +681,14 @@ td .row-col {
 
 .size {
   width: 9rem !important;
-}
-.size:hover {
-  transition-delay: 2s;
-  border-bottom: 2px solid #fde4c3;
+  color: white;
 }
 
 .admin-page {
   text-align: center;
+}
+
+.color {
+  color: white;
 }
 </style>

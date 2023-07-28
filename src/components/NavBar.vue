@@ -2,7 +2,7 @@
   <div>
     <nav class="navbar">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#"><div class="img-logo"><img src="https://i.postimg.cc/3rnwxrZ6/My-project-9.png" alt=""></div></a>
+        <a class="navbar-brand" href="#"><div class="img-logo"><router-link to="/home"><img src="https://i.postimg.cc/3rnwxrZ6/My-project-9.png" alt=""></router-link></div></a>
         <button
           class="navbar-toggler"
           type="button"
@@ -10,7 +10,6 @@
           data-bs-target="#offcanvasNavbar"
           aria-controls="offcanvasNavbar"
           aria-label="Toggle navigation"
-          style="background-color: #fde4c3;"
         >
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -19,7 +18,7 @@
           tabindex="-1"
           id="offcanvasNavbar"
           aria-labelledby="offcanvasNavbarLabel"
-          style="background-color: #302a18; color: #fde4c3;"
+          
         >
           <div class="offcanvas-header">
             <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Offcanvas</h5>
@@ -82,12 +81,22 @@ export default {};
 
 <style scoped>
 ul li a{
-  color: #fde4c3;
+  color: black;
 }
 
 .img-logo{
   width: 7rem;
   height: 100%;
+  animation: rotate360 5s infinite linear;
+}
+
+@keyframes rotate360 {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .img-logo img{
