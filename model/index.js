@@ -138,7 +138,7 @@ class Product {
         });
     };
     fetchProduct(req, res) {
-        const fetchProductQuery = `SELECT id, prodName, prodDesc, prodPrice, prodCate, quantity, image, shipPrice FROM Products WHERE id = ?;`;
+        const fetchProductQuery = `SELECT id, prodName, prodDesc, prodPrice, prodCate, quantity, image FROM Products WHERE id = ?;`;
 
         db.query(fetchProductQuery, [req.params.id], (err, results) => {
             if (err) throw err;
